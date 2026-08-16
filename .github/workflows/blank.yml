@@ -1,0 +1,11 @@
+name: infra_pipe_line
+on: 
+ push:
+  branches: ["main"]
+jobs:
+  build:
+   runs-on: LAPTOP-CKBV8N1N
+   steps:
+     - uses: actions/checkout@v4
+     - name: Run a one-line script
+       run: echo Hello, world!

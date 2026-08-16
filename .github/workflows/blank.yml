@@ -4,7 +4,7 @@ on:
   branches: ["main"]
 jobs:
   build:
-   runs-on: LAPTOP-CKBV8N1N
+   runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v4
      - name: Run a one-line script

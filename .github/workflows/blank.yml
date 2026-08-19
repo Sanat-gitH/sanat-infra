@@ -13,16 +13,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
-
-      # 1. Checkout code
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Test
       - name: Hello
         run: echo Hello, world!
 
-      # 3. Azure Login
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -30,34 +26,26 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 4. Check Azure Login
       - name: Check Azure Login
         run: az account show
 
-      # 5. Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # 6. Check Terraform version
       - name: Terraform Version
         run: terraform version
 
-      # 7. Terraform Format Check
       - name: Terraform Format
         run: terraform fmt -check -recursive
 
-      # 8. Terraform Init
       - name: Terraform Init
         run: terraform init
 
-      # 9. Terraform Validate
       - name: Terraform Validate
         run: terraform validate
 
-      # 10. Terraform Plan
       - name: Terraform Plan
+        env:
+          ARM_USE_OIDC: true
         run: terraform plan
-
-      # 11. Terraform Apply
-      - name: Terraform Apply
         run: terraform apply -auto-approve

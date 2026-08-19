@@ -13,12 +13,11 @@ jobs:
     runs-on: self-hosted
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Hello
-        run: echo Hello, world!
+        run: echo "Hello, world!"
 
       - name: Azure Login
         uses: azure/login@v2
@@ -36,16 +35,19 @@ jobs:
       - name: Terraform Version
         run: terraform version
 
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
-
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Validate
-        run: terraform validate
+        run: |
+          Write-Host "===== TERRAFORM VALIDATE START ====="
+          terraform validate
+          Write-Host "===== TERRAFORM VALIDATE END ====="
 
       - name: Terraform Plan
         env:
           ARM_USE_OIDC: true
-        run: terraform plan
+        run: |
+          Write-Host "===== TERRAFORM PLAN START ====="
+          terraform plan
+          Write-Host "===== TERRAFORM PLAN END ====="

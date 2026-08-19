@@ -48,4 +48,3 @@ jobs:
         env:
           ARM_USE_OIDC: true
         run: terraform plan
-          Write-Host "===== TERRAFORM PLAN END ====="

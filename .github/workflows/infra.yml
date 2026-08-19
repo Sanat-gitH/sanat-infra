@@ -48,3 +48,7 @@ jobs:
         env:
           ARM_USE_OIDC: true
         run: terraform plan
+      - name: Terraform Apply
+        env:
+          ARM_USE_OIDC: true
+        run: terraform apply -auto-approve

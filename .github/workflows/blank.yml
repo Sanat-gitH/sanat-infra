@@ -13,6 +13,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -31,6 +32,8 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
 
       - name: Terraform Version
         run: terraform version
@@ -39,15 +42,10 @@ jobs:
         run: terraform init
 
       - name: Terraform Validate
-        run: |
-          Write-Host "===== TERRAFORM VALIDATE START ====="
-          terraform validate
-          Write-Host "===== TERRAFORM VALIDATE END ====="
+        run: terraform validate
 
       - name: Terraform Plan
         env:
           ARM_USE_OIDC: true
-        run: |
-          Write-Host "===== TERRAFORM PLAN START ====="
-          terraform plan
+        run: terraform plan
           Write-Host "===== TERRAFORM PLAN END ====="
